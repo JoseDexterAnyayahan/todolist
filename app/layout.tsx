@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 
 export const metadata = {
   title: "ToDo UI Demo",
@@ -54,7 +55,9 @@ export default function RootLayout({
 
           {/* MAIN APP */}
           <main className="relative min-h-screen w-full flex flex-col">
-            {children}
+            <ThemeProvider attribute="class" defaultTheme="dark">
+              {children}
+            </ThemeProvider>
           </main>
         </div>
       </body>
