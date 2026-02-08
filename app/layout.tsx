@@ -1,10 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "ToDo UI Demo",
-  description: "Mobile UI/UX To-Do Demo built with Next.js",
+  description: "Mobile UI/UX ToDo Demo",
+  manifest: "/manifest.json",
+  themeColor: "#000000",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "ToDo",
+  },
 };
+
 
 export const viewport: Viewport = {
   width: "device-width",
