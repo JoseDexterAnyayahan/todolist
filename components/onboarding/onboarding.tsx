@@ -8,7 +8,7 @@ import Link from "next/link";
 const slides = [
   {
     emoji: "😁",
-    title: "Welcome",
+    title: "Welco",
     description: "Manage your task very easily!",
   },
   {
@@ -33,41 +33,43 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center bg-zinc-700">
-      {/* MOBILE FRAME */}
-      <div className="w-full max-w-sm h-screen relative overflow-hidden bg-black">
+    <div className="min-h-screen bg-black md:bg-zinc-700 md:flex md:justify-center">
+  {/* MOBILE FRAME */}
+  <div className="w-screen md:w-full md:max-w-sm h-screen relative overflow-hidden bg-black">
 
-        {/* GRADIENT BACKGROUND */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,#f59e0b33,transparent_40%),radial-gradient(circle_at_20%_80%,#14b8a633,transparent_40%)]" />
+    {/* GRADIENT BACKGROUND */}
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,#f59e0b33,transparent_40%),radial-gradient(circle_at_20%_80%,#14b8a633,transparent_40%)]" />
 
-        {/* SLIDES */}
-        <div
-          className="flex h-full transition-transform duration-500"
-          style={{ transform: `translateX(-${index * 100}%)` }}
-        >
-          {slides.map((s, i) => (
-            <div key={i} className="min-w-full">
-              <Slide {...s} />
-            </div>
-          ))}
+    {/* SLIDES */}
+    <div
+      className="flex h-full transition-transform duration-500"
+      style={{ transform: `translateX(-${index * 100}%)` }}
+    >
+      {slides.map((s, i) => (
+        <div key={i} className="min-w-full">
+          <Slide {...s} />
         </div>
-
-        {/* NEXT BUTTON */}
-        <div className="absolute bottom-6 right-6">
-          {index === slides.length - 1 ? (
-            <Link href="/todo">
-              <Button className="rounded-xl px-6">Start</Button>
-            </Link>
-          ) : (
-            <Button
-              onClick={next}
-              className="rounded-xl px-6 bg-zinc-800 hover:bg-zinc-700"
-            >
-              Next &raquo;
-            </Button>
-          )}
-        </div>
-      </div>
+      ))}
     </div>
+
+    {/* NEXT BUTTON */}
+    <div className="absolute bottom-6 right-6">
+      {index === slides.length - 1 ? (
+        <Link href="/todo">
+          <Button className="rounded-xl px-6">Start</Button>
+        </Link>
+      ) : (
+        <Button
+          onClick={next}
+          className="rounded-xl px-6 bg-zinc-800 hover:bg-zinc-700"
+        >
+          Next &raquo;
+        </Button>
+      )}
+    </div>
+
+  </div>
+</div>
+
   );
 }

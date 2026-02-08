@@ -13,7 +13,6 @@ export const metadata = {
   },
 };
 
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -29,7 +28,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="bg-black text-white antialiased">
-        
         {/* DESKTOP / TABLET BLOCK SCREEN */}
         <div className="hidden md:flex h-screen w-full items-center justify-center bg-gradient-to-br from-zinc-950 via-black to-zinc-900">
           <div className="text-center space-y-4 max-w-md px-6">
@@ -37,8 +35,8 @@ export default function RootLayout({
               Mobile Experience Only 📱
             </h1>
             <p className="text-zinc-400 leading-relaxed">
-              This demo is designed exclusively for mobile screens to
-              showcase UI/UX interaction and layout decisions.
+              This demo is designed exclusively for mobile screens to showcase
+              UI/UX interaction and layout decisions.
             </p>
             <p className="text-sm text-zinc-500">
               Please resize your browser or open on your phone.
@@ -47,8 +45,7 @@ export default function RootLayout({
         </div>
 
         {/* MOBILE APP CONTAINER */}
-        <div className="md:hidden min-h-screen w-full relative overflow-hidden">
-          
+        <div className="md:hidden min-h-screen w-screen relative overflow-hidden bg-black">
           {/* SUBTLE BACKGROUND GLOW */}
           <div className="pointer-events-none absolute inset-0 -z-10">
             <div className="absolute top-[-20%] right-[-20%] w-[300px] h-[300px] bg-amber-500/10 rounded-full blur-3xl" />
@@ -56,10 +53,9 @@ export default function RootLayout({
           </div>
 
           {/* MAIN APP */}
-          <main className="relative min-h-screen flex flex-col">
+          <main className="relative min-h-screen w-full flex flex-col">
             {children}
           </main>
-
         </div>
       </body>
     </html>
