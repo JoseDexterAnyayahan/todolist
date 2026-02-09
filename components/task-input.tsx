@@ -30,7 +30,7 @@ export default function TaskInput() {
   // Handle submit
   const handleSubmit = () => {
     if (!title.trim()) return;
-    
+
     // TODO: Add task to your state/database
     console.log({
       title,
@@ -54,7 +54,7 @@ export default function TaskInput() {
   const setQuickDate = (days: number) => {
     const date = new Date();
     date.setDate(date.getDate() + days);
-    setDate(date.toISOString().split('T')[0]);
+    setDate(date.toISOString().split("T")[0]);
   };
 
   return (
@@ -64,15 +64,27 @@ export default function TaskInput() {
         <button
           className="
             fixed bottom-24 right-4
-            h-14 w-14 rounded-full
+            h-14 w-14 rounded-2xl
             flex items-center justify-center
-            shadow-lg transition-all
-            bg-zinc-900 text-white hover:bg-zinc-800 hover:scale-110
-            dark:bg-white dark:text-black dark:hover:bg-zinc-200
+            shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/40
+            bg-gradient-to-br from-amber-400 to-amber-500
+            hover:from-amber-500 hover:to-amber-600
+            text-white
+            transition-all duration-300
+            hover:scale-110 active:scale-95
             z-50
+            group
+            border-2 border-amber-300/20
           "
         >
-          <Plus size={24} />
+          <Plus
+            size={26}
+            strokeWidth={2.5}
+            className="group-hover:rotate-90 transition-transform duration-300"
+          />
+
+          {/* Glow effect */}
+          <div className="absolute inset-0 rounded-2xl bg-amber-400/30 blur-xl group-hover:bg-amber-400/50 transition-all duration-300" />
         </button>
       </DialogTrigger>
 
@@ -175,8 +187,8 @@ export default function TaskInput() {
                         ? p === "High"
                           ? "bg-red-500 text-white border-red-500"
                           : p === "Medium"
-                          ? "bg-yellow-500 text-white border-yellow-500"
-                          : "bg-green-500 text-white border-green-500"
+                            ? "bg-yellow-500 text-white border-yellow-500"
+                            : "bg-green-500 text-white border-green-500"
                         : "border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300 dark:hover:bg-zinc-800"
                     }
                   `}

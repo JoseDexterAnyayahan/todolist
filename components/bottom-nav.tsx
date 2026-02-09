@@ -13,15 +13,15 @@ const navItems = [
 
 export default function BottomNav() {
   const pathname = usePathname();
-  const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
+  const [ripples, setRipples] = useState<{ id: number; x: number; y: number; href: string }[]>([]);
 
-  const createRipple = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const createRipple = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     const id = Date.now();
 
-    setRipples((prev) => [...prev, { id, x, y }]);
+    setRipples((prev) => [...prev, { id, x, y, href }]);
     setTimeout(() => {
       setRipples((prev) => prev.filter((ripple) => ripple.id !== id));
     }, 600);
@@ -29,7 +29,7 @@ export default function BottomNav() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 pb-safe">
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none" />
       
       <div className="relative border-t border-border bg-background/95 backdrop-blur-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_24px_rgba(0,0,0,0.4)]">
         <div className="flex justify-around items-center h-20 max-w-lg mx-auto px-6 relative">
@@ -41,21 +41,23 @@ export default function BottomNav() {
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={createRipple}
+                onClick={(e) => createRipple(e, item.href)}
                 className="relative flex flex-col items-center justify-center gap-1.5 group py-2 px-5 min-w-[80px] overflow-hidden"
               >
-                {ripples.map((ripple) => (
-                  <span
-                    key={ripple.id}
-                    className="absolute bg-amber-400/30 rounded-full animate-[ripple_0.6s_ease-out]"
-                    style={{
-                      left: ripple.x,
-                      top: ripple.y,
-                      width: 0,
-                      height: 0,
-                    }}
-                  />
-                ))}
+                {ripples
+                  .filter((ripple) => ripple.href === item.href)
+                  .map((ripple) => (
+                    <span
+                      key={ripple.id}
+                      className="absolute bg-amber-400/30 rounded-full animate-[ripple_0.6s_ease-out] pointer-events-none"
+                      style={{
+                        left: ripple.x,
+                        top: ripple.y,
+                        width: 0,
+                        height: 0,
+                      }}
+                    />
+                  ))}
 
                 {isActive && (
                   <>

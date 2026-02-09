@@ -1,5 +1,8 @@
+"use client";
+
 import { ReactNode } from "react";
 import { ChevronRight, Crown } from "lucide-react";
+import Link from "next/link";
 
 interface SettingsCardProps {
   title: string;
@@ -9,6 +12,7 @@ interface SettingsCardProps {
   danger?: boolean;
   premium?: boolean;
   onClick?: () => void;
+  href?: string;
 }
 
 export default function SettingsCard({
@@ -19,15 +23,15 @@ export default function SettingsCard({
   danger = false,
   premium = false,
   onClick,
+  href,
 }: SettingsCardProps) {
-  return (
+  const content = (
     <div
-      onClick={onClick}
       className={`
         w-full rounded-xl border p-4
         flex items-center gap-3
         transition-all
-        ${onClick ? 'cursor-pointer' : ''}
+        ${onClick || href ? 'cursor-pointer' : ''}
         ${
           danger
             ? "border-red-200 bg-red-50 hover:bg-red-100 dark:border-red-900/50 dark:bg-red-950/20 dark:hover:bg-red-950/40"
@@ -92,4 +96,14 @@ export default function SettingsCard({
       )}
     </div>
   );
+
+  if (href) {
+    return <Link href={href} className="block">{content}</Link>;
+  }
+
+  if (onClick) {
+    return <div onClick={onClick}>{content}</div>;
+  }
+
+  return content;
 }
